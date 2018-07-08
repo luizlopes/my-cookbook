@@ -3,10 +3,14 @@
 
 <%= link_to "Enviar uma receita", new_recipe_url %>
 
+<% @cuisines.each do |cuisine| %>
+  <%= link_to cuisine.name, cuisine %>
+<% end %>
+
 <% @recipes.each do |recipe| %>
-    <h1><%= link_to recipe.title, recipe_path(recipe) %></h1>
-    <li><%= recipe.recipe_type %></li>
-    <li><%= recipe.cuisine.name %></li>
-    <li><%= recipe.difficulty %></li>
-    <li><%= recipe.cook_time %> minutos</li>
+  <h1><%= link_to recipe.title, recipe_path(recipe) %></h1>
+  <li><%= recipe.recipe_type %></li>
+  <li><%= recipe.cuisine.name %></li>
+  <li><%= recipe.difficulty %></li>
+  <li><%= recipe.cook_time %> minutos</li>
 <% end %>
