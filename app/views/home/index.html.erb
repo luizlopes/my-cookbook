@@ -1,6 +1,13 @@
 <h1>CookBook</h1>
 <p>Bem-vindo ao maior livro de receitas online</p>
 
+<div>
+  <%= form_tag("/search", method: "get") do %>
+    <%= label_tag :title, "Buscar por" %>
+    <%= text_field_tag :title %>
+    <%= submit_tag "Buscar" %>
+  <% end %>
+
 <h3>Cozinhas</h3>
 <ul>
   <% @cuisines.each do |cuisine| %>
