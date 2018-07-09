@@ -22,6 +22,18 @@ class RecipesController < ApplicationController
     end
   end
 
+  def edit
+    @recipe = Recipe.find(params[:id])
+    @cuisines = Cuisine.all
+    @recipe_types = RecipeType.all
+  end
+
+  def update
+    recipe = Recipe.find(params[:id])
+    recipe.update recipe_params
+    redirect_to recipe_path(recipe.id)
+  end
+
   private
 
   def recipe_params
