@@ -83,4 +83,13 @@ feature 'User search recipes' do
     expect(page).to have_css('h1', text: 'Pao de calabresa')
     expect(page).to have_css('h1', text: 'Sopa de calabresa')
   end
+
+  scenario 'and view recipes with same word with differents cases' do
+    visit root_path
+    fill_in 'Buscar por', with: 'CALABRESA'
+    click_on 'Buscar'
+
+    expect(page).to have_css('h1', text: 'Pao de calabresa')
+    expect(page).to have_css('h1', text: 'Sopa de calabresa')
+  end
 end
