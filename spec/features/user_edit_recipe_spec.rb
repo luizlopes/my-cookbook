@@ -49,4 +49,14 @@ feature 'User edit a recipe' do
     # validando
     expect(page).to have_content('Você deve informar todos os dados da receita')
   end
+
+  scenario 'and must fill Título' do
+    # navegando
+    fill_in 'Título', with: ''
+    click_on 'Enviar'
+
+    # validando
+    expect(page).to have_content('Você deve informar todos os dados da receita')
+  end
+
 end
