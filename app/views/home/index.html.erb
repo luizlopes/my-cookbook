@@ -22,6 +22,10 @@
 <% end %>
 </ul>
 
+<% if @recipes.empty? %>
+  <p>Nenhuma receita encontrada</p>
+<% end %>
+
 <%= render @recipes %>
 
 <%= link_to "Enviar uma receita", new_recipe_url %>

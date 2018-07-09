@@ -49,4 +49,12 @@ feature 'User search recipes' do
     expect(page).to have_css('h1', text: 'Sopa de grão de bico')
     expect(page).to have_css('h1', text: 'Pao de calabresa')
   end
+
+  scenario 'and view no recipes' do
+    visit root_path
+    fill_in 'Buscar por', with: 'Receita que não existe'
+    click_on 'Buscar'
+
+    expect(page).to have_content('Nenhuma receita encontrada')
+  end
 end
