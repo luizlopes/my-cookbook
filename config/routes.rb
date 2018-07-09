@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   root "home#index"
   resources :recipes
   resources :cuisines, only: [:show, :new, :create]
+  resources :recipe_types, only: [:show]
 end
