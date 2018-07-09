@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 feature 'User edit a recipe' do
-  scenario 'successfully' do
+
+  before do
     # preparando dados
     recipe_type = RecipeType.create(name: 'Sopa')
     cuisine_colombiana = Cuisine.create(name: 'Colombiana')
@@ -18,7 +19,10 @@ feature 'User edit a recipe' do
     visit root_path
     click_on 'Sopa de grão de bico'
     click_on 'Editar'
+  end
 
+  scenario 'successfully' do
+    # navegando
     fill_in 'Dificuldade', with: 'Não tão fácil'
     fill_in 'Tempo de Preparo', with: '120'
     select 'Chilena', from: 'Cozinha'
@@ -35,5 +39,14 @@ feature 'User edit a recipe' do
     expect(page).to have_css('p', text: 'grao de bico e cebola')
     expect(page).to have_css('h3', text: 'Como Preparar')
     expect(page).to have_css('p', text:  'ferva a agua com tudo dentro e coma')
+  end
+
+  scenario 'and must fill Tempo de Preparo' do
+    # navegando
+    fill_in 'Tempo de Preparo', with: ''
+    click_on 'Enviar'
+
+    # validando
+    expect(page).to have_content('Você deve informar todos os dados da receita')
   end
 end
