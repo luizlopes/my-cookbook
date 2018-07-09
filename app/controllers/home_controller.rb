@@ -15,7 +15,7 @@ class HomeController < ApplicationController
     if param_title.blank?
       @recipes = Recipe.all
     else
-      @recipes = Recipe.where("title LIKE :title", title: "#{param_title}%")
+      @recipes = Recipe.where("title LIKE :title", title: "%#{param_title}%")
     end
 
     render :index
