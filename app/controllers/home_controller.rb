@@ -8,10 +8,15 @@ class HomeController < ApplicationController
 
   def search
     param_title = params[:title]
-    @recipes = Recipe.where("title = :title", title: param_title)
-
+    
     @cuisines = Cuisine.all
     @recipe_types = RecipeType.all
+
+    if param_title.blank?
+      @recipes = Recipe.all
+    else
+      @recipes = Recipe.where("title = :title", title: param_title)
+    end
 
     render :index
   end
