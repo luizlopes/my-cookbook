@@ -1,3 +1,8 @@
+<% if user_signed_in? %>
+  <div>Olá <%= current_user.email %></div>
+<% end %>
+<%= link_to 'Entrar', new_user_session_path %>
+
 <h1>CookBook</h1>
 <p>Bem-vindo ao maior livro de receitas online</p>
 
