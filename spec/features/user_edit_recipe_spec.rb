@@ -85,4 +85,19 @@ feature 'User edit a recipe' do
     # validando
     expect(page).to have_content('Você deve informar todos os dados da receita')
   end
+
+  scenario 'and back to recipe details' do
+    click_on 'Cancelar'
+
+    expect(page).to have_css('h1', text: 'Sopa de grão de bico')
+    expect(page).to have_css('h3', text: 'Detalhes')
+    expect(page).to have_css('p', text: 'Sopa')
+    expect(page).to have_css('p', text: 'Colombiana')
+    expect(page).to have_css('p', text: 'Fácil')
+    expect(page).to have_css('p', text: "90 minutos")
+    expect(page).to have_css('h3', text: 'Ingredientes')
+    expect(page).to have_css('p', text: 'grao de bico e cebola')
+    expect(page).to have_css('h3', text: 'Como Preparar')
+    expect(page).to have_css('p', text:  'ferva a agua com tudo dentro e coma')
+  end
 end
