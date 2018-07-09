@@ -15,7 +15,7 @@ class RecipesController < ApplicationController
       redirect_to recipe_path(@recipe.id)
     else
       load_recipes_associations
-      flash[:error] = 'Você deve informar todos os dados da receita'
+      flash_error_message
       render :new
     end
   end
@@ -31,7 +31,7 @@ class RecipesController < ApplicationController
       redirect_to recipe_path(@recipe.id)
     else
       load_recipes_associations
-      flash[:error] = 'Você deve informar todos os dados da receita'
+      flash_error_message
       render :edit
     end
   end
@@ -53,6 +53,10 @@ class RecipesController < ApplicationController
 
   def recipe_id_param
     params[:id]
+  end
+
+  def flash_error_message
+    flash[:error] = 'Você deve informar todos os dados da receita'
   end
 
 end
