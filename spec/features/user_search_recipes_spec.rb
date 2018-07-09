@@ -25,6 +25,14 @@ feature 'User search recipes' do
                           difficulty: 'Difícil',
                           ingredients: 'farinha, ovos, oleo, calabresa moida',
                           cook_method: 'bata tudo no liquidificador e coloque para assar')
+
+    recipe_pao_calabresa = Recipe.create(title: 'Sopa de calabresa',
+                          cook_time: 70,
+                          cuisine: cuisine_italiana,
+                          recipe_type: recipe_type_sopa,
+                          difficulty: 'Médio',
+                          ingredients: 'cebola e calabresa moida',
+                          cook_method: 'ferva a agua com tudo dentro e coma')
   end
 
   scenario 'successfully' do
@@ -56,5 +64,14 @@ feature 'User search recipes' do
     click_on 'Buscar'
 
     expect(page).to have_content('Nenhuma receita encontrada')
+  end
+
+  scenario 'and view recipes with same first word' do
+    visit root_path
+    fill_in 'Buscar por', with: 'Sopa'
+    click_on 'Buscar'
+
+    expect(page).to have_css('h1', text: 'Sopa de grão de bico')
+    expect(page).to have_css('h1', text: 'Sopa de calabresa')
   end
 end
