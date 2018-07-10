@@ -18,10 +18,12 @@ feature 'Visitor register recipe' do
     fill_in 'Tempo de Preparo', with: '45'
     fill_in 'Ingredientes', with: 'Trigo para quibe, cebola, tomate picado, azeite, salsinha'
     fill_in 'Como Preparar', with: 'Misturar tudo e servir. Adicione limão a gosto.'
+    attach_file 'Foto', Rails.root.join('spec', 'support', 'tabule.jpeg')
     click_on 'Enviar'
 
 
     expect(page).to have_css('h1', text: 'Tabule')
+    expect(page).to have_css("img[src*='tabule.jpeg']")
     expect(page).to have_css('h3', text: 'Detalhes')
     expect(page).to have_css('p', text: 'Entrada')
     expect(page).to have_css('p', text: 'Arabe')
@@ -46,7 +48,6 @@ feature 'Visitor register recipe' do
     fill_in 'Ingredientes', with: ''
     fill_in 'Como Preparar', with: ''
     click_on 'Enviar'
-
 
     expect(page).to have_content('Você deve informar todos os dados da receita')
   end
