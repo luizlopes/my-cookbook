@@ -4,6 +4,7 @@ feature 'User edit a recipe' do
 
   before do
     # preparando dados
+    user_chef = User.create(email: 'chef@masterchef.com', password: '123456')
     recipe_type = RecipeType.create(name: 'Sopa')
     cuisine_colombiana = Cuisine.create(name: 'Colombiana')
     cuisine_chilena = Cuisine.create(name: 'Chilena')
@@ -13,7 +14,8 @@ feature 'User edit a recipe' do
                           recipe_type: recipe_type,
                           difficulty: 'Fácil',
                           ingredients: 'grao de bico e cebola',
-                          cook_method: 'ferva a agua com tudo dentro e coma')
+                          cook_method: 'ferva a agua com tudo dentro e coma',
+                          user: user_chef)
     
     # navegando
     visit root_path

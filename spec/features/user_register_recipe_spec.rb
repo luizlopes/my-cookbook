@@ -8,13 +8,9 @@ feature 'Visitor register recipe' do
     RecipeType.create(name: 'Entrada')
     RecipeType.create(name: 'Prato Principal')
     RecipeType.create(name: 'Sobremesa')
+
     # simula a ação do usuário
-    visit root_path
-    
-    click_on 'Entrar'
-    fill_in 'Email', with: user.email
-    fill_in 'Senha', with: user.password
-    click_on 'Entrar'
+    login_with user
 
     click_on 'Enviar uma receita'
 
@@ -44,11 +40,21 @@ feature 'Visitor register recipe' do
     expect(Recipe.last.user.email).to eq(user.email)
   end
 
+  scenario 'and must make login before' do
+
+    visit root_path
+    click_on 'Enviar uma receita'
+
+    expect(page).to have_content('Você precisa estar logado para enviar uma receita')
+  end
+
   scenario 'and must fill in all fields' do
     #cria os dados necessários, nesse caso não vamos criar dados no banco
+    user = User.create(email: 'chef@masterchef.com', password: '123456')
     Cuisine.create(name: 'Arabe')
+
     # simula a ação do usuário
-    visit root_path
+    login_with user
     click_on 'Enviar uma receita'
 
     fill_in 'Título', with: ''
@@ -59,5 +65,15 @@ feature 'Visitor register recipe' do
     click_on 'Enviar'
 
     expect(page).to have_content('Você deve informar todos os dados da receita')
+  end
+
+  private 
+
+  def login_with(user)
+    visit root_path
+    click_on 'Entrar'
+    fill_in 'Email', with: user.email
+    fill_in 'Senha', with: user.password
+    click_on 'Entrar'
   end
 end

@@ -4,6 +4,8 @@ feature 'User search recipes' do
 
   before do
     # preparando dados
+    user_chef = User.create(email: 'chef@masterchef.com', password: '123456')
+
     recipe_type_sopa = RecipeType.create(name: 'Sopa')
     recipe_type_pao = RecipeType.create(name: 'Pao')
 
@@ -16,7 +18,8 @@ feature 'User search recipes' do
                           recipe_type: recipe_type_sopa,
                           difficulty: 'Fácil',
                           ingredients: 'grao de bico e cebola',
-                          cook_method: 'ferva a agua com tudo dentro e coma')
+                          cook_method: 'ferva a agua com tudo dentro e coma',
+                          user: user_chef)
 
     recipe_pao_calabresa = Recipe.create(title: 'Pao de calabresa',
                           cook_time: 50,
@@ -24,15 +27,17 @@ feature 'User search recipes' do
                           recipe_type: recipe_type_pao,
                           difficulty: 'Difícil',
                           ingredients: 'farinha, ovos, oleo, calabresa moida',
-                          cook_method: 'bata tudo no liquidificador e coloque para assar')
+                          cook_method: 'bata tudo no liquidificador e coloque para assar',
+                          user: user_chef)
 
-    recipe_pao_calabresa = Recipe.create(title: 'Sopa de calabresa',
+    recipe_sopa_calabresa = Recipe.create(title: 'Sopa de calabresa',
                           cook_time: 70,
                           cuisine: cuisine_italiana,
                           recipe_type: recipe_type_sopa,
                           difficulty: 'Médio',
                           ingredients: 'cebola e calabresa moida',
-                          cook_method: 'ferva a agua com tudo dentro e coma')
+                          cook_method: 'ferva a agua com tudo dentro e coma',
+                          user: user_chef)
   end
 
   scenario 'successfully' do
