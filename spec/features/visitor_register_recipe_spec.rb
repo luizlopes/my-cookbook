@@ -2,13 +2,20 @@ require 'rails_helper'
 
 feature 'Visitor register recipe' do
   scenario 'successfully' do
-    #cria os dados necessários, nesse caso não vamos criar dados no banco
+    #cria os dados necessários
+    user = User.create(email: 'chef@masterchef.com', password: '123456')
     Cuisine.create(name: 'Arabe')
     RecipeType.create(name: 'Entrada')
     RecipeType.create(name: 'Prato Principal')
     RecipeType.create(name: 'Sobremesa')
     # simula a ação do usuário
     visit root_path
+    
+    click_on 'Entrar'
+    fill_in 'Email', with: user.email
+    fill_in 'Senha', with: user.password
+    click_on 'Entrar'
+
     click_on 'Enviar uma receita'
 
     fill_in 'Título', with: 'Tabule'
@@ -33,6 +40,8 @@ feature 'Visitor register recipe' do
     expect(page).to have_css('p', text: 'Trigo para quibe, cebola, tomate picado, azeite, salsinha')
     expect(page).to have_css('h3', text: 'Como Preparar')
     expect(page).to have_css('p', text:  'Misturar tudo e servir. Adicione limão a gosto.')
+    
+    expect(Recipe.last.user.email).to eq(user.email)
   end
 
   scenario 'and must fill in all fields' do
