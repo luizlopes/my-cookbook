@@ -12,6 +12,7 @@ feature 'user sign in' do
 
     expect(current_path).to eq(root_path)
     expect(page).to have_content("Olá #{user.email}")
+    expect(page).to_not have_content('Entrar')
   end
 
   scenario 'and logout' do
