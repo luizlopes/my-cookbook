@@ -10,5 +10,7 @@
 <p><%= @recipe.cook_method %></p>
 <%= image_tag @recipe.photo.url %>
 
-<%= link_to "Editar", edit_recipe_path(@recipe.id) %>
+<% if @recipe.user.eql? current_user %>
+  <%= link_to "Editar", edit_recipe_path(@recipe.id) %>
+<% end %>
 <%= link_to "Voltar", :root %>

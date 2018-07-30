@@ -1,5 +1,9 @@
 class RecipesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :create]
+
+  def index
+    @user_recipes = User.find(params[:user_id]).recipes
+  end
   
   def show
     @recipe = find_recipe_by_id_param

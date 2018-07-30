@@ -143,13 +143,21 @@ feature 'User edit a recipe' do
 
   scenario 'and must make login before edit' do
     # navegando
-    visit root_path
-    click_on 'Sopa de grão de bico'
-    
-    click_on 'Editar'
+    visit edit_recipe_path(@recipe)
 
     # validando
     expect(page).to have_content('Você precisa estar logado para enviar uma receita')
+  end
+
+  scenario 'and just edit yours recipes' do
+    another_user = User.create(email: 'another@mail.com', password: '123123')
+
+    visit root_path
+    login_with another_user
+
+    click_on 'Sopa de grão de bico'
+
+    expect(page).to_not have_link('Editar')
   end
 
   private 

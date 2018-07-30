@@ -1,0 +1,11 @@
+<h2>Minhas receitas</h2>
+
+<% if @user_recipes.empty? %>
+  <h3>Você ainda não possui receitas</h3>
+<% end %>
+
+<% @user_recipes.each do |recipe| %>
+  <h3><%= link_to recipe.title, recipe %></h3>
+  <%= link_to 'Editar', edit_recipe_path(recipe) %>  
+  <%= link_to 'Apagar', recipe, method: :delete %>
+<% end %>
