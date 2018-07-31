@@ -1,0 +1,9 @@
+language: ruby
+rvm:
+  - 2.3.1
+before_script:
+  - gem install bundler-audit
+script:
+  - bundle exec rspec --format documentation
+  - bundle exec rubocop --config .rubocop.yml
+  - bundle-audit check --update
