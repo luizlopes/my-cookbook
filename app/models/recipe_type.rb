@@ -1,5 +1,6 @@
 class RecipeType < ApplicationRecord
-  has_many :recipes
+  has_many :recipes, dependent: :destroy
 
-  validates :name, presence: {message: 'Você deve informar o nome do tipo de receita'}
+  mensagem = 'Você deve informar o nome do tipo de receita'
+  validates :name, presence: { message: mensagem }
 end

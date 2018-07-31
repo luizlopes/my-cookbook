@@ -1,10 +1,10 @@
 class RecipesController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :create]
+  before_action :authenticate_user!, only: %i[new create edit create]
 
   def index
     @user_recipes = User.find(params[:user_id]).recipes
   end
-  
+
   def show
     @recipe = find_recipe_by_id_param
   end
@@ -44,7 +44,7 @@ class RecipesController < ApplicationController
 
   def destroy
     Recipe.delete(params[:id])
-    redirect_to user_recipes_path(current_user), 
+    redirect_to user_recipes_path(current_user),
                 notice: 'Receita apagada com sucesso'
   end
 
@@ -60,7 +60,9 @@ class RecipesController < ApplicationController
   end
 
   def recipe_params
-    params.require(:recipe).permit(:title, :recipe_type_id, :cuisine_id, :difficulty, :cook_time, :ingredients, :cook_method, :photo)
+    params.require(:recipe).permit(:title, :recipe_type_id, :cuisine_id,
+                                   :difficulty, :cook_time, :ingredients,
+                                   :cook_method, :photo)
   end
 
   def recipe_id_param
@@ -70,5 +72,4 @@ class RecipesController < ApplicationController
   def flash_error_message
     flash[:error] = 'Você deve informar todos os dados da receita'
   end
-
 end
