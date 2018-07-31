@@ -42,6 +42,12 @@ class RecipesController < ApplicationController
     end
   end
 
+  def destroy
+    Recipe.delete(params[:id])
+    redirect_to user_recipes_path(current_user), 
+                notice: 'Receita apagada com sucesso'
+  end
+
   private
 
   def find_recipe_by_id_param
