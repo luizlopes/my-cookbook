@@ -1,5 +1,9 @@
 <% if user_signed_in? %>
-  <div>Olá <%= current_user.email %> | <%= link_to 'Minhas receitas', user_recipes_path(current_user) %> | <%= link_to 'Sair', destroy_user_session_path, method: :delete %></div>
+  <% if current_user.admin? %>
+    <div>Administrador | <%= link_to 'Sair', destroy_user_session_path, method: :delete %></div>
+  <% else %>
+    <div>Olá <%= current_user.email %> | <%= link_to 'Minhas receitas', user_recipes_path(current_user) %> | <%= link_to 'Sair', destroy_user_session_path, method: :delete %></div>
+  <% end %>
 <% else %>
   <%= link_to 'Entrar', new_user_session_path %>
 <% end %>
