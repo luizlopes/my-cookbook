@@ -23,3 +23,6 @@
 .byebug_history
 
 /public/system
+
+# Ignore simplecov files
+/coverage
