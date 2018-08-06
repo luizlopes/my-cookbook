@@ -1,7 +1,9 @@
 <h1><%= @recipe_type.name %></h1>
 
+<%= link_to 'Editar', edit_recipe_type_path(@recipe_type) %>
+
 <% if @recipe_type.recipes.empty? %>
-  <p>Nenhuma receita encontrada para este tipo de receitas</p>
+  <p>Nenhuma receita encontrada para este tipo</p>
 <% end %>
 
 <%= render @recipe_type.recipes %>

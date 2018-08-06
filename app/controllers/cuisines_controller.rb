@@ -35,14 +35,6 @@ class CuisinesController < ApplicationController
     @cuisine = Cuisine.find(params[:id])
   end
 
-  def authenticate_admin!
-    redirect_to(root_path, alert: 'Usuário sem permissão') unless admin_user?
-  end
-
-  def admin_user? 
-    current_user&.admin?
-  end
-
   def cuisine_params
     params.require(:cuisine).permit(:name)
   end
