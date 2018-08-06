@@ -60,4 +60,23 @@ feature 'Admin register cuisine' do
     expect(current_path).to eq(root_path)
     expect(page).to have_content('Usuário sem permissão')
   end
+
+  scenario 'and must be unique' do
+    admin = User.create(email: 'admin@admin.com', password: '123123',
+                        admin: true)
+    Cuisine.create(name: 'Peruana')
+
+    visit root_path
+    click_on 'Entrar'
+    fill_in 'Email', with: admin.email
+    fill_in 'Senha', with: admin.password
+    click_on 'Entrar'
+
+    click_on 'Adicionar cozinha'
+
+    fill_in 'Nome', with: 'peruana'
+    click_on 'Enviar'
+
+    expect(page).to have_content('Cozinha já existe')
+  end
 end

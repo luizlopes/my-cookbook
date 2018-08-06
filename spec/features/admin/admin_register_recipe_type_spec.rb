@@ -58,4 +58,23 @@ feature 'Admin register recipe_type' do
     expect(current_path).to eq(root_path)
     expect(page).to have_content('Usuário sem permissão')
   end
+
+  scenario 'and must be unique' do
+    admin = User.create(email: 'admin@admin.com', password: '123123',
+                        admin: true)
+    RecipeType.create(name: 'Sobremesa')
+
+    visit root_path
+    click_on 'Entrar'
+    fill_in 'Email', with: admin.email
+    fill_in 'Senha', with: admin.password
+    click_on 'Entrar'
+
+    click_on 'Adicionar tipo de receita'
+
+    fill_in 'Nome', with: 'sobremesa'
+    click_on 'Enviar'
+
+    expect(page).to have_content('Tipo de receita já existe')
+  end
 end
