@@ -1,11 +1,9 @@
 require 'rails_helper'
 
-feature 'Admin edit a cuisine' do
+feature 'Admin register cuisine' do
   scenario 'successfully' do
     admin = User.create(email: 'admin@admin.com', password: '123123',
                         admin: true)
-    Cuisine.create(name: 'Brasileira')
-    Cuisine.create(name: 'Peruana')
 
     visit root_path
     click_on 'Entrar'
@@ -13,21 +11,19 @@ feature 'Admin edit a cuisine' do
     fill_in 'Senha', with: admin.password
     click_on 'Entrar'
 
-    click_on 'Brasileira'
-    click_on 'Editar'
+    click_on 'Adicionar cozinha'
 
-    fill_in 'Nome', with: 'Brasileirissima'
+    fill_in 'Nome', with: 'Brasileira'
     click_on 'Enviar'
 
-    expect(page).to have_content('Cozinha alterada com sucesso')
-    expect(page).to have_css('h1', text: 'Brasileirissima')
+    expect(page).to have_css('h1', text: 'Brasileira')
+    expect(page).to have_content('Nenhuma receita encontrada para este tipo'\
+                                 ' de cozinha')
   end
 
-  scenario 'and left blank field' do
+  scenario 'and must fill in name' do
     admin = User.create(email: 'admin@admin.com', password: '123123',
                         admin: true)
-    Cuisine.create(name: 'Brasileira')
-    Cuisine.create(name: 'Peruana')
 
     visit root_path
     click_on 'Entrar'
@@ -35,28 +31,22 @@ feature 'Admin edit a cuisine' do
     fill_in 'Senha', with: admin.password
     click_on 'Entrar'
 
-    click_on 'Brasileira'
-    click_on 'Editar'
+    click_on 'Adicionar cozinha'
 
     fill_in 'Nome', with: ''
     click_on 'Enviar'
 
-    expect(page).to have_content('Erro ao alterar a cozinha')
     expect(page).to have_content('Você deve informar o nome da cozinha')
   end
 
   scenario 'and must be logged as admin' do
-    brasileira = Cuisine.create(name: 'Brasileira')
-    Cuisine.create(name: 'Peruana')
-
-    visit edit_cuisine_path(brasileira)
+    visit new_cuisine_path
 
     expect(current_path).to eq(root_path)
     expect(page).to have_content('Usuário sem permissão')
   end
 
   scenario 'and must be logged as admin' do
-    brasileira = Cuisine.create(name: 'Brasileira')
     joao = User.create(email: 'joao@admin.com', password: '123123')
 
     visit root_path
@@ -65,7 +55,7 @@ feature 'Admin edit a cuisine' do
     fill_in 'Senha', with: joao.password
     click_on 'Entrar'
 
-    visit edit_cuisine_path(brasileira)
+    visit new_cuisine_path
 
     expect(current_path).to eq(root_path)
     expect(page).to have_content('Usuário sem permissão')

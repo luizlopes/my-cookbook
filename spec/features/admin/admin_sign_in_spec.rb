@@ -1,8 +1,9 @@
 require 'rails_helper'
 
-feature 'Admin sign in' do 
+feature 'Admin sign in' do
   scenario 'successfully' do
-    admin = User.create(email: 'admin@admin.com', password: '123123', admin: true)
+    admin = User.create(email: 'admin@admin.com', password: '123123',
+                        admin: true)
 
     visit root_path
     click_on 'Entrar'
@@ -15,7 +16,8 @@ feature 'Admin sign in' do
   end
 
   scenario 'and logout' do
-    admin = User.create(email: 'admin@admin.com', password: '123123', admin: true)
+    admin = User.create(email: 'admin@admin.com', password: '123123',
+                        admin: true)
 
     visit root_path
     click_on 'Entrar'
