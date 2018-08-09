@@ -146,7 +146,7 @@ feature 'User edit a recipe' do
     visit edit_recipe_path(@recipe)
 
     # validando
-    expect(page).to have_content('Você precisa estar logado para enviar uma receita')
+    expect(page).to have_content('Para continuar, faça login ou registre-se.')
   end
 
   scenario 'and just edit yours recipes' do

@@ -1,11 +1,11 @@
-<h2>Minhas receitas</h2>
+<h2><%= t('users.recipes.index.my_recipes') %></h2>
 
 <% if @user_recipes.empty? %>
-  <h3>Você ainda não possui receitas</h3>
+  <h3><%= t('users.recipes.index.empty_recipes') %></h3>
 <% end %>
 
 <% @user_recipes.each do |recipe| %>
   <h3><%= link_to recipe.title, recipe %></h3>
-  <%= link_to 'Editar', edit_recipe_path(recipe) %>  
-  <%= link_to 'Apagar', recipe, method: :delete %>
+  <%= link_to t('users.recipes.index.edit'), edit_recipe_path(recipe) %>  
+  <%= link_to t('users.recipes.index.delete'), recipe, method: :delete %>
 <% end %>

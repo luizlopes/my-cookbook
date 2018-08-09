@@ -1,0 +1,19 @@
+pt-BR:
+  recipes:
+    edit:
+      title: Alteração de Receita
+      cancel: Cancelar
+      send: Enviar
+    show:
+      details: Detalhes
+      edit: Editar
+      go_back: Voltar
+    new:
+      title: Receita
+  users:
+    recipes:
+      index:
+        delete: Apagar
+        edit: Editar
+        empty_recipes: Você ainda não possui receitas
+        my_recipes: Minhas receitas

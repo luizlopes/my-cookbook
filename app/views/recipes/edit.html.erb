@@ -1,5 +1,5 @@
-<h1>Alteração de Receita</h1>
+<h1><%= t('recipes.edit.title') %></h1>
 
 <%= render "form" %>
 
-<%= link_to "Cancelar", recipe_path(@recipe.id) %>
+<%= link_to t('recipes.edit.cancel'), recipe_path(@recipe.id) %>
