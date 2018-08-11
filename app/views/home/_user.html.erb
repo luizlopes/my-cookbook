@@ -1,0 +1,1 @@
+<div>Olá <%= current_user.email %> | <%= link_to 'Minhas receitas', user_recipes_path(current_user) %> | <%= link_to 'Sair', destroy_user_session_path, method: :delete %></div>

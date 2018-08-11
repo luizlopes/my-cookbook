@@ -1,15 +1,3 @@
 <h1>Tipo de Receita</h1>
 
-<% @recipe_type.errors.full_messages.each do |m| %>
-  <p><%= m %></p>
-<% end %>
-
-<%= form_for @recipe_type do |f| %>
-  <div>
-    <%= f.label :name, 'Nome' %>
-    <%= f.text_field :name %>
-  </div>
-  <div>
-    <%= f.submit "Enviar" %>
-  </div>
-<% end %>
+<%= render 'form' %>
